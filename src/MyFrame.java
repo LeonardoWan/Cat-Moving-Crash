@@ -50,7 +50,7 @@ public class MyFrame extends JFrame implements ActionListener, WindowListener {
         panel = new JPanel();
         panel.add(button);
         panel.setBackground(Color.BLACK);
-        panel.setBounds(200,50,100,50);
+        panel.setBounds(190,50,100,50);
         panel2 = new JPanel();
         panel2.add(button2);
         panel2.setBackground(Color.black);
