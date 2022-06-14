@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="Crash:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Crash_jar</output-path>
+    <output-path>$PROJECT_DIR$/..</output-path>
     <root id="archive" name="Crash.jar">
       <element id="module-output" name="Crash" />
     </root>

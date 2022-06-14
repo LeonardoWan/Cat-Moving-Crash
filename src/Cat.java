@@ -6,8 +6,10 @@ import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.TimerTask;
 
 public class Cat extends JFrame implements WindowListener, ActionListener {
+    int z = 0;
     ImageIcon image = new ImageIcon(getClass().getClassLoader().getResource("ezgif.com-gif-maker.gif"));
     ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("cat.png"));
     Timer timer;
@@ -20,12 +22,13 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
     int y = random.nextInt(0,500);
     int time = 3200; //this is the time for the pc to shut down, shown in seconds.
 
+
     JLabel label;
-    public Cat(){
+    public Cat() {
         this.setTitle("cat");
         this.setIconImage(icon.getImage());
         Random random = new Random();
-        this.setSize(640,578);
+        this.setSize(640, 578);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(this);
         label = new JLabel();
@@ -34,26 +37,17 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
         int y = random.nextInt(100, 500);
         this.add(label);
         this.setResizable(false);
-        this.setLocation(x,y);
+        this.setLocation(x, y);
         this.setVisible(true);
         timer = new Timer(0, this);
         timer.start();
-        Timer timer2 = new Timer(10, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-                    Process process = Runtime.getRuntime().exec("Shutdown -s -t " + String.valueOf(time));
-                    BufferedReader reader = new BufferedReader( new InputStreamReader(process.getInputStream()));
-                    JOptionPane.showMessageDialog(null,"Ur pc will shutdown in " + time + " !");
-                }catch (Exception ex){
-                    ex.printStackTrace();
-                }
-
-            }
-        });
-        timer2.start();
+        if (z == 0){
+            new TimerCode(time);
+            z = 1;
+        }
 
     }
+
 
     @Override
     public void windowOpened(WindowEvent e) {
