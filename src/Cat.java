@@ -18,7 +18,7 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
     int yVelocity = random.nextInt(5,15);
     int x = random.nextInt(0,1300);
     int y = random.nextInt(0,500);
-    int time = 3200; //this is the time for the pc to shut down, shown in seconds
+    int time = 3200; //this is the time for the pc to shut down, shown in seconds.
 
     JLabel label;
     public Cat(){
