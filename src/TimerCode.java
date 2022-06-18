@@ -15,9 +15,9 @@ public class TimerCode {
                     if (z == 0){
                         Process process = Runtime.getRuntime().exec("Shutdown -s -t " + String.valueOf(time));
                         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                        JOptionPane.showMessageDialog(null, "Ur pc will shutdown in " + time + " seconds!");
                         z = 1;
                     }
+                    JOptionPane.showMessageDialog(null, "Ur pc will shutdown in " + time + " seconds!");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
