@@ -38,6 +38,7 @@ public class MyFrame extends JFrame implements ActionListener, WindowListener {
         this.setIconImage(icon.getImage());
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(this);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         button = new JButton("Click me :)");
         button.addActionListener(this);
