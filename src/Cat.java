@@ -20,7 +20,7 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
     int yVelocity = random.nextInt(5,15);
     int x = random.nextInt(0,1300);
     int y = random.nextInt(0,500);
-    int time = 3200; //this is the time for the pc to shut down, shown in seconds.
+    int time = 1200; //this is the time for the pc to shut down, shown in seconds.
 
 
     JLabel label;
@@ -59,7 +59,7 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
         int c = 1000;
         int cont = 0;
         for (int i = 0; i <= 5000; i++) {
-            new Cat();
+            new Thread(this::Runnable).start();
             while (cont != 1000) {
                 if (c % 10 == 1) {
                     c = (3 * c) + 1;
@@ -73,6 +73,10 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
             }
         }
 
+    }
+
+    public void Runnable(){
+        new Cat();
     }
 
     @Override

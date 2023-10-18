@@ -86,8 +86,8 @@ public class GUI extends JFrame implements WindowListener {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(evt.getSource() == jButton1){
-            for(int i = 0 ; i <= 10 ; i++){
-                new Cat();
+            for(int i = 0 ; i <= 20 ; i++){
+                new Thread(this::Runnable).start();
             }
             PlaySound(battlepass);
         }
@@ -98,6 +98,10 @@ public class GUI extends JFrame implements WindowListener {
             new CatSafe();
             PlaySound(battlepass);
         }
+    }
+
+    public void Runnable(){
+        new Cat();
     }
 
     /**
