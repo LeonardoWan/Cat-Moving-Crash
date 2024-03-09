@@ -86,9 +86,7 @@ public class GUI extends JFrame implements WindowListener {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(evt.getSource() == jButton1){
-            for(int i = 0 ; i <= 20 ; i++){
-                new Thread(this::Runnable).start();
-            }
+            new Thread(this::Runnable).start();
             PlaySound(battlepass);
         }
     }
@@ -108,6 +106,13 @@ public class GUI extends JFrame implements WindowListener {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        boolean hasArgs;
+        if(args.length > 0){
+            hasArgs = true;
+            new Cat();
+        }else{
+            hasArgs = false;
+        }
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -128,7 +133,7 @@ public class GUI extends JFrame implements WindowListener {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new GUI().setVisible(true);
+            if(!hasArgs) new GUI().setVisible(true);
         });
     }
 

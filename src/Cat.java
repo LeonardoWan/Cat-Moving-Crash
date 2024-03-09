@@ -4,14 +4,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
+import java.util.Objects;
 import java.util.Random;
-import java.util.TimerTask;
 
 public class Cat extends JFrame implements WindowListener, ActionListener {
     int z = 0;
-    ImageIcon image = new ImageIcon(getClass().getClassLoader().getResource("ezgif.com-gif-maker.gif"));
-    ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("cat.png"));
+    ImageIcon image = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("ezgif.com-gif-maker.gif")));
+    ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("cat.png")));
     Timer timer;
     Random random = new Random();
     final int WIDTH = 1300;
@@ -39,13 +45,16 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
         this.setResizable(false);
         this.setLocation(x, y);
         this.setVisible(true);
-        timer = new Timer(0, this);
+       timer = new Timer(0, this);
         timer.start();
         if (z == 0){
             new TimerCode(time);
             z = 1;
         }
+    }
 
+    public static void main(String[] args) {
+        new Cat();
     }
 
 
@@ -58,25 +67,29 @@ public class Cat extends JFrame implements WindowListener, ActionListener {
     public void windowClosing(WindowEvent e) {
         int c = 1000;
         int cont = 0;
-        for (int i = 0; i <= 5000; i++) {
+        for (int i = 0; i <= 10; i++) {
             new Thread(this::Runnable).start();
-            while (cont != 1000) {
-                if (c % 10 == 1) {
-                    c = (3 * c) + 1;
-                    cont++;
-                    // System.out.println(i);
-                } else {
-                    c = (3 / 2);
-                    cont++;
-                    //System.out.println(i);
-                }
-            }
         }
-
     }
 
     public void Runnable(){
-        new Cat();
+        Class<Cat> currClass = Cat.class;
+        ProtectionDomain domain = currClass.getProtectionDomain();
+        CodeSource codeSource = domain.getCodeSource();
+        URL location = codeSource.getLocation();
+        String path = "";
+        try {
+            path = location.toURI().getPath();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        };
+        path = path.substring(1);
+        try {
+            ProcessBuilder builder = new ProcessBuilder("java" , "-jar" , path, "HOLA");
+            builder.start();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
